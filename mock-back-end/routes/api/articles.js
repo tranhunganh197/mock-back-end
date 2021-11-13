@@ -105,6 +105,7 @@ router.get('/feed', auth.required, function(req, res, next) {
       Article.find({ author: {$in: user.following}})
         .limit(Number(limit))
         .skip(Number(offset))
+        .sort({createdAt: 'desc'})
         .populate('author')
         .exec(),
       Article.count({ author: {$in: user.following}})
